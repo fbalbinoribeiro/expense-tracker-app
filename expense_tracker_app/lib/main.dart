@@ -16,11 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Category Selector',
       theme: appTheme,
       home: Scaffold(
-        appBar: AppBar(title: const Text('Select Category')),
-        body: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: AmountSelector(),
-        ),
+        body: Padding(padding: EdgeInsets.all(16.0), child: AmountSelector()),
       ),
     );
   }
