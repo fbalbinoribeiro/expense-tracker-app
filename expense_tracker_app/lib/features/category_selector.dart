@@ -5,48 +5,83 @@ import '../domain/enums/category.dart';
 class CategorySelector extends StatelessWidget {
   final void Function(Category)? onCategorySelected;
 
-  const CategorySelector({super.key, this.onCategorySelected});
+  final double amount;
+
+  const CategorySelector({
+    super.key,
+    this.onCategorySelected,
+    required this.amount,
+  });
 
   @override
   Widget build(BuildContext context) {
     final categories = Category.values;
-    return GridView.builder(
-      shrinkWrap: true,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 1,
-      ),
-      itemCount: categories.length,
-      itemBuilder: (context, index) {
-        final category = categories[index];
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GestureDetector(
-            onTap: () => onCategorySelected?.call(category),
-            child: Container(
-              decoration: BoxDecoration(
-                color: category.color.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: category.color, width: 2),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 16.0, left: 8.0, right: 8.0),
+          child: Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Navigator.of(context).pop(),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(category.icon, color: category.color, size: 32),
-                  const SizedBox(height: 8),
-                  Text(
-                    category.name[0].toUpperCase() + category.name.substring(1),
-                    style: TextStyle(
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Amount: R\$ ${amount.toStringAsFixed(2)}',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1.2,
+            ),
+            itemCount: categories.length,
+            itemBuilder: (context, index) {
+              final category = categories[index];
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () => onCategorySelected?.call(category),
+                  child: Container(
+                    decoration: BoxDecoration(
                       color: category.color,
-                      fontWeight: FontWeight.bold,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: category.color, width: 2),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(category.icon, color: Colors.white, size: 40),
+                        const SizedBox(height: 8),
+                        FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            category.name[0].toUpperCase() +
+                                category.name.substring(1),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
+                ),
+              );
+            },
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:expense_tracker_app/features/category_selector.dart';
 import 'package:flutter/material.dart';
 
 class AmountSelector extends StatefulWidget {
@@ -80,7 +81,20 @@ class _AmountSelectorState extends State<AmountSelector> {
                   width: 140,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: null, // No interaction for now
+                    onPressed: () {
+                      final amount =
+                          double.tryParse(
+                            _controller.text.replaceAll(RegExp(r'[^0-9.]'), ''),
+                          ) ??
+                          1.0;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CategorySelector(amount: amount),
+                        ),
+                      );
+                    },
                     child: const Text('OK', style: TextStyle(fontSize: 20)),
                   ),
                 ),
