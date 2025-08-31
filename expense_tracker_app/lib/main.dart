@@ -1,4 +1,4 @@
-import 'package:expense_tracker_app/domain/enums/expense.dart';
+import 'package:expense_tracker_app/domain/models/expense.dart';
 import 'package:expense_tracker_app/features/amount_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
@@ -14,10 +14,7 @@ void main() async {
   // debugRepaintRainbowEnabled = true; // Flashes repaint regions
 
   final dir = await getApplicationDocumentsDirectory();
-  final isar = await Isar.openAsync(
-    schemas: [ExpenseSchema],
-    directory: dir.path,
-  );
+  Isar.openSync([ExpenseSchema], directory: dir.path.toString());
 
   runApp(const MyApp());
 }

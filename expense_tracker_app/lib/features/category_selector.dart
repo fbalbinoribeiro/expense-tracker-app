@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 
 import '../domain/enums/category.dart';
-import '../domain/enums/expense.dart';
+import '../domain/models/expense.dart';
 
 class CategorySelector extends StatelessWidget {
   final void Function(Category)? onCategorySelected;
