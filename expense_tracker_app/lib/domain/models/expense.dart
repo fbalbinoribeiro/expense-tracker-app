@@ -1,24 +1,8 @@
-import 'package:isar/isar.dart';
+import 'package:drift/drift.dart';
 
-import '../enums/category.dart';
-
-part 'expense.g.dart';
-
-@collection
-class Expense {
-  Id id = Isar.autoIncrement;
-
-  final int amountInCents;
-
-  @enumerated
-  @Index(type: IndexType.value)
-  final Category category;
-
-  final DateTime addedAt;
-
-  Expense({
-    required this.amountInCents,
-    required this.category,
-    required this.addedAt,
-  });
+class Expenses extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get amountInCents => integer()();
+  TextColumn get category => text()();
+  DateTimeColumn get addedAt => dateTime()();
 }

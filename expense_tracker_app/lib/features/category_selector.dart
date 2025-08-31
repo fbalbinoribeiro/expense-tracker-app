@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:isar/isar.dart';
 
 import '../domain/enums/category.dart';
-import '../domain/models/expense.dart';
+import '../domain/models/database.dart';
 
 class CategorySelector extends StatelessWidget {
   final void Function(Category)? onCategorySelected;
@@ -15,17 +14,21 @@ class CategorySelector extends StatelessWidget {
     required this.amount,
   });
 
-  Future<void> _saveExpense(double amount, Category category) async {
-    final isar = Isar.getInstance();
-    if (isar == null) return;
-    final expense = Expense(
-      amountInCents: (amount * 100).toInt(),
-      category: category,
-      addedAt: DateTime.now(),
-    );
-    await isar.writeTxn(() async {
-      await isar.collection<Expense>().put(expense);
-    });
+  Future<void> _saveExpense(
+    BuildContext context,
+    double amount,
+    Category category,
+  ) async {
+    final db = AppDatabase();
+    await db
+        .into(db.expenses)
+        .insert(
+          ExpensesCompanion.insert(
+            amountInCents: (amount * 100).toInt(),
+            category: category.name,
+            addedAt: DateTime.now(),
+          ),
+        );
   }
 
   @override
@@ -68,7 +71,7 @@ class CategorySelector extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () async {
-                        await _saveExpense(amount, category);
+                        await _saveExpense(context, amount, category);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Successfully added!'),
