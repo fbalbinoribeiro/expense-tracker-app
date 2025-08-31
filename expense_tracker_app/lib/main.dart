@@ -1,14 +1,23 @@
+import 'package:expense_tracker_app/domain/enums/expense.dart';
 import 'package:expense_tracker_app/features/amount_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'app_theme.dart';
 
-void main() {
+void main() async {
   // debugPaintSizeEnabled = true; // Outlines boxes
   // debugPaintBaselinesEnabled = true; // Shows text baselines
   // debugPaintPointersEnabled = true; // Highlights touch areas
   // debugPaintLayerBordersEnabled = true; // Outlines composited layers
   // debugRepaintRainbowEnabled = true; // Flashes repaint regions
+
+  final dir = await getApplicationDocumentsDirectory();
+  final isar = await Isar.openAsync(
+    schemas: [ExpenseSchema],
+    directory: dir.path,
+  );
 
   runApp(const MyApp());
 }

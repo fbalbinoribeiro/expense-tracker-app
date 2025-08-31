@@ -2,6 +2,8 @@ import 'package:isar/isar.dart';
 
 import 'category.dart';
 
+part 'expense.g.dart';
+
 @collection
 class Expense {
   Id id = Isar.autoIncrement;
