@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'app_theme.dart';
 
 void main() {
+  // debugPaintSizeEnabled = true; // Outlines boxes
+  // debugPaintBaselinesEnabled = true; // Shows text baselines
+  // debugPaintPointersEnabled = true; // Highlights touch areas
+  // debugPaintLayerBordersEnabled = true; // Outlines composited layers
+  // debugRepaintRainbowEnabled = true; // Flashes repaint regions
+
   runApp(const MyApp());
 }
 
