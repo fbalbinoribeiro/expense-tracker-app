@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
 
-import 'category.dart';
+import '../enums/category.dart';
 
 part 'expense.g.dart';
 
