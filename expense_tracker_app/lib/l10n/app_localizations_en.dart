@@ -2,6 +2,8 @@ import 'app_localizations_strategy.dart';
 
 class AppLocalizationsEn implements AppLocalizationsStrategy {
   @override
+  String get allCategories => 'All';
+  @override
   String get clear => 'Clear';
   @override
   String get appTitle => 'Amount Selector';

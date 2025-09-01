@@ -5,4 +5,9 @@ class Expenses extends Table {
   IntColumn get amountInCents => integer()();
   TextColumn get category => text()();
   DateTimeColumn get addedAt => dateTime()();
+
+  List<Set<Column>> get indexes => [
+    {addedAt},
+    {category, addedAt},
+  ];
 }

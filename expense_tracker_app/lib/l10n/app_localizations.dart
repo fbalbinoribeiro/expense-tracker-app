@@ -32,4 +32,5 @@ class AppLocalizations {
   String get categoryPet => _strategy.categoryPet;
   String get categoryOther => _strategy.categoryOther;
   String get clear => _strategy.clear;
+  String get allCategories => _strategy.allCategories;
 }

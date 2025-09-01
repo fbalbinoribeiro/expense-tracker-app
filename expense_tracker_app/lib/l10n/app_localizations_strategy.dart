@@ -13,4 +13,5 @@ abstract class AppLocalizationsStrategy {
   String get categoryPet;
   String get categoryOther;
   String get clear;
+  String get allCategories;
 }

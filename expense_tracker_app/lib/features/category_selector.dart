@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../domain/enums/category.dart';
-import '../domain/models/database.dart';
+import '../domain/database/database.dart';
 import '../l10n/app_localizations.dart';
 import '../utils/currency.dart';
 import '../widgets/header_widget.dart';

@@ -2,6 +2,8 @@ import 'app_localizations_strategy.dart';
 
 class AppLocalizationsPtBr implements AppLocalizationsStrategy {
   @override
+  String get allCategories => 'Todos';
+  @override
   String get clear => 'Limpar';
   @override
   String get appTitle => 'Selecionador de Valor';
