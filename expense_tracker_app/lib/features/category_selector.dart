@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../domain/enums/category.dart';
 import '../domain/database/database.dart';
+import '../domain/enums/category.dart';
 import '../l10n/app_localizations.dart';
 import '../utils/currency.dart';
 import '../widgets/header_widget.dart';
@@ -68,9 +68,11 @@ class CategorySelector extends StatelessWidget {
                     onTap: () async {
                       await _saveExpense(context, amount, category);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Successfully added!'),
-                          duration: Duration(seconds: 5),
+                        SnackBar(
+                          content: Text(
+                            AppLocalizations.of(context).successfullyAdded,
+                          ),
+                          duration: const Duration(seconds: 5),
                         ),
                       );
                       onCategorySelected?.call(category);

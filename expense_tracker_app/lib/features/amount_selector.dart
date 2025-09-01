@@ -11,7 +11,17 @@ class AmountSelector extends StatefulWidget {
 }
 
 class _AmountSelectorState extends State<AmountSelector> {
-  final TextEditingController _controller = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    _resetAmount();
+  }
+
+  void _resetAmount() {
+    _controller.text = '1.00';
+  }
+
+  final TextEditingController _controller = TextEditingController(text: '1.00');
   final quickAmounts = [1, 2, 5, 10, 20, 50, 100, 200, 500];
 
   @override
@@ -93,7 +103,7 @@ class _AmountSelectorState extends State<AmountSelector> {
                   width: 140,
                   height: 60,
                   child: OutlinedButton(
-                    onPressed: () => _controller.clear(),
+                    onPressed: _resetAmount,
                     child: Text(
                       AppLocalizations.of(context).clear,
                       style: const TextStyle(fontSize: 20),

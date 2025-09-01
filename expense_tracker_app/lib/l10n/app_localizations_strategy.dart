@@ -16,4 +16,5 @@ abstract class AppLocalizationsStrategy {
   String get allCategories;
   String get totalExpenses;
   String get totalAmount;
+  String get successfullyAdded;
 }

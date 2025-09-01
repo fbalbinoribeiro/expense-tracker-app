@@ -2,6 +2,8 @@ import 'app_localizations_strategy.dart';
 
 class AppLocalizationsEn implements AppLocalizationsStrategy {
   @override
+  String get successfullyAdded => 'Successfully added!';
+  @override
   String get totalExpenses => 'Total Expenses';
   @override
   String get totalAmount => 'Total Amount';

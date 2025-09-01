@@ -35,4 +35,5 @@ class AppLocalizations {
   String get allCategories => _strategy.allCategories;
   String get totalExpenses => _strategy.totalExpenses;
   String get totalAmount => _strategy.totalAmount;
+  String get successfullyAdded => _strategy.successfullyAdded;
 }
