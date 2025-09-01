@@ -1,4 +1,3 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:expense_tracker_app/features/category_selector.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +21,10 @@ class _AmountSelectorState extends State<AmountSelector> {
   }
 
   void _addAmount(int amount) {
-    final current = int.tryParse(_controller.text) ?? 0;
+    final current =
+        double.tryParse(_controller.text.replaceAll(',', '.')) ?? 0.0;
     final newValue = current + amount;
-    _controller.text = newValue.toString();
+    _controller.text = newValue.toStringAsFixed(2);
   }
 
   @override
@@ -35,17 +35,35 @@ class _AmountSelectorState extends State<AmountSelector> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 16),
+          Center(
+            child: SizedBox(
+              width: 100,
+              height: 100,
+              child: Image.asset('assets/icon/app_icon_transparent.png'),
+            ),
+          ),
+          const SizedBox(height: 16),
           SizedBox(
             width: 300,
-            child: TextField(
-              controller: _controller,
-              decoration: InputDecoration(border: OutlineInputBorder()),
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              inputFormatters: [
-                CurrencyTextInputFormatter.currency(
-                  locale: 'pt_BR',
-                  symbol: 'R\$ ',
-                  decimalDigits: 2,
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Text(
+                    'R\$',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    decoration: InputDecoration(border: OutlineInputBorder()),
+                    keyboardType: TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
+                    textAlign: TextAlign.right,
+                    readOnly: true,
+                  ),
                 ),
               ],
             ),
