@@ -2,6 +2,15 @@ import 'app_localizations_strategy.dart';
 
 class AppLocalizationsEn implements AppLocalizationsStrategy {
   @override
+  String get deleteConfirmTitle => 'Delete Expense';
+  @override
+  String get deleteConfirmMessage =>
+      'Are you sure you want to delete this expense?';
+  @override
+  String get delete => 'Delete';
+  @override
+  String get cancel => 'Cancel';
+  @override
   String get successfullyAdded => 'Successfully added!';
   @override
   String get totalExpenses => 'Total Expenses';

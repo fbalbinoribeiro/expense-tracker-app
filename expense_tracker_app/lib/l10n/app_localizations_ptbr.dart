@@ -2,6 +2,15 @@ import 'app_localizations_strategy.dart';
 
 class AppLocalizationsPtBr implements AppLocalizationsStrategy {
   @override
+  String get deleteConfirmTitle => 'Excluir Despesa';
+  @override
+  String get deleteConfirmMessage =>
+      'Tem certeza que deseja excluir esta despesa?';
+  @override
+  String get delete => 'Excluir';
+  @override
+  String get cancel => 'Cancelar';
+  @override
   String get successfullyAdded => 'Adicionado com sucesso!';
   @override
   String get totalExpenses => 'Total de Despesas';

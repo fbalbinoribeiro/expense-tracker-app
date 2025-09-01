@@ -5,6 +5,10 @@ import 'app_localizations_ptbr.dart';
 import 'app_localizations_strategy.dart';
 
 class AppLocalizations {
+  String get deleteConfirmTitle => _strategy.deleteConfirmTitle;
+  String get deleteConfirmMessage => _strategy.deleteConfirmMessage;
+  String get delete => _strategy.delete;
+  String get cancel => _strategy.cancel;
   final AppLocalizationsStrategy _strategy;
 
   AppLocalizations._(this._strategy);

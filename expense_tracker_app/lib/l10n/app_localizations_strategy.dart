@@ -17,4 +17,8 @@ abstract class AppLocalizationsStrategy {
   String get totalExpenses;
   String get totalAmount;
   String get successfullyAdded;
+  String get deleteConfirmTitle;
+  String get deleteConfirmMessage;
+  String get delete;
+  String get cancel;
 }

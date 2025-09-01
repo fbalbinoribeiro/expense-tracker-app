@@ -15,6 +15,8 @@ class ExpensesSummary extends StatefulWidget {
 }
 
 class _ExpensesSummaryState extends State<ExpensesSummary> {
+  final AppDatabase _db = AppDatabase();
+  late final ExpenseDao _dao = ExpenseDao(_db);
   List<ExpenseDTO> expenses = [];
   String? selectedCategory;
   late int selectedMonth;
@@ -35,8 +37,6 @@ class _ExpensesSummaryState extends State<ExpensesSummary> {
   }
 
   Future<void> _fetchExpenses() async {
-    final db = AppDatabase();
-    final dao = ExpenseDao(db);
     String? categoryName;
     final allLabel = AppLocalizations.of(context).allCategories;
     if (selectedCategory != null && selectedCategory != allLabel) {
@@ -46,7 +46,7 @@ class _ExpensesSummaryState extends State<ExpensesSummary> {
       );
       categoryName = catEnum.name;
     }
-    final result = await dao.getExpensesForMonthYearCategory(
+    final result = await _dao.getExpensesForMonthYearCategory(
       selectedMonth,
       selectedYear,
       category: categoryName,
@@ -146,21 +146,73 @@ class _ExpensesSummaryState extends State<ExpensesSummary> {
               ],
             ),
           ),
+          Divider(thickness: 1, height: 1, color: Colors.grey[300]),
           Expanded(
             child: ListView.builder(
               itemCount: expenses.length,
               itemBuilder: (context, index) {
                 final expense = expenses[index];
-                return ListTile(
-                  leading: Icon(
-                    expense.category.icon,
-                    color: expense.category.color,
+                final isEven = index % 2 == 0;
+                return Container(
+                  color: isEven ? Colors.grey[50] : Colors.grey[200],
+                  child: ListTile(
+                    leading: Icon(
+                      expense.category.icon,
+                      color: expense.category.color,
+                    ),
+                    title: Text(expense.category.localizedName(context)),
+                    subtitle: Text(
+                      '${expense.date.day.toString().padLeft(2, '0')}/${expense.date.month.toString().padLeft(2, '0')}/${expense.date.year}',
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('R\$ ${expense.amount.toStringAsFixed(2)}'),
+                        const SizedBox(width: 8),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.delete_outline,
+                            color: Colors.redAccent,
+                          ),
+                          onPressed: () async {
+                            showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  ).deleteConfirmTitle,
+                                ),
+                                content: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  ).deleteConfirmMessage,
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.of(ctx).pop(),
+                                    child: Text(
+                                      AppLocalizations.of(context).cancel,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () async {
+                                      Navigator.of(ctx).pop();
+                                      await _dao.deleteExpense(expense.id);
+                                      await _fetchExpenses();
+                                    },
+                                    child: Text(
+                                      AppLocalizations.of(context).delete,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                  title: Text(expense.category.localizedName(context)),
-                  subtitle: Text(
-                    '${expense.date.day.toString().padLeft(2, '0')}/${expense.date.month.toString().padLeft(2, '0')}/${expense.date.year}',
-                  ),
-                  trailing: Text('R\$ ${expense.amount.toStringAsFixed(2)}'),
                 );
               },
             ),

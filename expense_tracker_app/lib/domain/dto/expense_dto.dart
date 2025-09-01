@@ -1,11 +1,13 @@
 import 'package:expense_tracker_app/domain/enums/category.dart';
 
 class ExpenseDTO {
+  final int id;
   final Category category;
   final DateTime date;
   final double amount;
 
   ExpenseDTO({
+    required this.id,
     required this.category,
     required this.date,
     required this.amount,
@@ -17,6 +19,7 @@ class ExpenseDTO {
       orElse: () => Category.other,
     );
     return ExpenseDTO(
+      id: expense.id,
       category: categoryEnum,
       date: expense.addedAt,
       amount: expense.amountInCents / 100.0,
