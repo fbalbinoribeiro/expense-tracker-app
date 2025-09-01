@@ -11,7 +11,7 @@ void main() async {
   // debugPaintLayerBordersEnabled = true; // Outlines composited layers
   // debugRepaintRainbowEnabled = true; // Flashes repaint regions
 
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
 
   runApp(const MyApp());
 }
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Amount Selector',
       theme: appTheme,
       home: Scaffold(
+        backgroundColor: Colors.white,
         body: Padding(padding: EdgeInsets.all(16.0), child: AmountSelector()),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

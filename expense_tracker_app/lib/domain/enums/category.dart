@@ -8,6 +8,7 @@ enum Category {
   company,
   health,
   personal,
+  pet,
   other,
 }
 
@@ -30,6 +31,8 @@ extension CategoryExtension on Category {
         return Icons.person;
       case Category.other:
         return Icons.category;
+      case Category.pet:
+        return Icons.pets;
     }
   }
 
@@ -51,6 +54,8 @@ extension CategoryExtension on Category {
         return Colors.indigo;
       case Category.other:
         return Colors.grey;
+      case Category.pet:
+        return Colors.brown;
     }
   }
 }
