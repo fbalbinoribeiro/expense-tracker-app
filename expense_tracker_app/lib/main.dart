@@ -1,6 +1,7 @@
 import 'package:expense_tracker_app/features/amount_selector.dart';
 import 'package:expense_tracker_app/features/expenses_summary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app_theme.dart';
 
@@ -22,8 +23,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Amount Selector',
+      title: 'Expenses Tracker',
       theme: appTheme,
+      supportedLocales: const [Locale('pt', 'BR')],
+      locale: const Locale('pt', 'BR'),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       home: const HomeScreen(),
     );
   }

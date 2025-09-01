@@ -2,6 +2,8 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:expense_tracker_app/features/category_selector.dart';
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+
 class AmountSelector extends StatefulWidget {
   const AmountSelector({super.key});
 
@@ -74,7 +76,10 @@ class _AmountSelectorState extends State<AmountSelector> {
                   height: 60,
                   child: OutlinedButton(
                     onPressed: () => _controller.clear(),
-                    child: const Text('Clear', style: TextStyle(fontSize: 20)),
+                    child: Text(
+                      AppLocalizations.of(context).clear,
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   ),
                 ),
                 SizedBox(

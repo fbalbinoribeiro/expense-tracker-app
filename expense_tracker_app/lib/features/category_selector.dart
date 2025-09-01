@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../domain/enums/category.dart';
 import '../domain/models/database.dart';
+import '../l10n/app_localizations.dart';
+import '../utils/currency.dart';
 import '../widgets/header_widget.dart';
 
 class CategorySelector extends StatelessWidget {
@@ -35,6 +37,9 @@ class CategorySelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categories = Category.values;
+    final formattedAmount = kCurrencyFormatter.format(amount);
+    final amountLabel = AppLocalizations.of(context).amount;
+
     return Container(
       color: Colors.white,
       child: Column(
@@ -42,7 +47,7 @@ class CategorySelector extends StatelessWidget {
           PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight),
             child: HeaderWidget(
-              title: 'Amount: R\$ ${amount.toStringAsFixed(2)}',
+              title: '$amountLabel: $formattedAmount',
               showBackButton: true,
             ),
           ),
@@ -85,8 +90,7 @@ class CategorySelector extends StatelessWidget {
                           FittedBox(
                             fit: BoxFit.contain,
                             child: Text(
-                              category.name[0].toUpperCase() +
-                                  category.name.substring(1),
+                              category.localizedName(context),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

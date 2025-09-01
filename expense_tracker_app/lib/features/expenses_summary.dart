@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
 import '../widgets/header_widget.dart';
 
 class ExpensesSummary extends StatelessWidget {
@@ -11,12 +12,12 @@ class ExpensesSummary extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: const HeaderWidget(
-          title: 'Expenses Summary',
+        child: HeaderWidget(
+          title: AppLocalizations.of(context).expensesSummary,
           showBackButton: true,
         ),
       ),
-      body: const Center(child: Text('No expenses yet.')),
+      body: Center(child: Text(AppLocalizations.of(context).noExpenses)),
     );
   }
 }
