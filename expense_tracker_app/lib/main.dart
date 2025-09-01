@@ -24,17 +24,29 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Amount Selector',
       theme: appTheme,
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: Padding(padding: EdgeInsets.all(16.0), child: AmountSelector()),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const ExpensesSummary()),
-            );
-          },
-          child: const Icon(Icons.summarize),
-        ),
+      home: const HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: AmountSelector(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const ExpensesSummary()),
+          );
+        },
+        child: const Icon(Icons.summarize),
       ),
     );
   }

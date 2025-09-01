@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../domain/enums/category.dart';
 import '../domain/models/database.dart';
+import '../widgets/header_widget.dart';
 
 class CategorySelector extends StatelessWidget {
   final void Function(Category)? onCategorySelected;
@@ -38,22 +39,11 @@ class CategorySelector extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0, left: 8.0, right: 8.0),
-            child: Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'Amount: R\$ ${amount.toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ),
-              ],
+          PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: HeaderWidget(
+              title: 'Amount: R\$ ${amount.toStringAsFixed(2)}',
+              showBackButton: true,
             ),
           ),
           const SizedBox(height: 16.0),

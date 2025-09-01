@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/header_widget.dart';
+
 class ExpensesSummary extends StatelessWidget {
   const ExpensesSummary({super.key});
 
   @override
   Widget build(BuildContext context) {
     // TODO: Implement summary UI
-    return Container();
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: const HeaderWidget(
+          title: 'Expenses Summary',
+          showBackButton: true,
+        ),
+      ),
+      body: const Center(child: Text('No expenses yet.')),
+    );
   }
 }
