@@ -21,6 +21,9 @@ class AppDatabase extends _$AppDatabase {
     onCreate: (m) async {
       await m.createAll();
     },
+    onUpgrade: (m, from, to) async {
+      await m.createAll();
+    },
     beforeOpen: (details) async {},
   );
 }

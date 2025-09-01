@@ -33,4 +33,6 @@ class AppLocalizations {
   String get categoryOther => _strategy.categoryOther;
   String get clear => _strategy.clear;
   String get allCategories => _strategy.allCategories;
+  String get totalExpenses => _strategy.totalExpenses;
+  String get totalAmount => _strategy.totalAmount;
 }

@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
-import 'package:expense_tracker_app/domain/models/expense.dart';
 import 'package:expense_tracker_app/domain/database/database.dart';
+import 'package:expense_tracker_app/domain/models/expense.dart';
 
 part 'expense_dao.g.dart';
 
@@ -14,9 +14,18 @@ class ExpenseDao extends DatabaseAccessor<AppDatabase> with _$ExpenseDaoMixin {
     String? category,
   }) async {
     final start = DateTime(year, month, 1);
-    final end = DateTime(year, month + 1, 1).subtract(const Duration(days: 1));
+    final nextMonth = month == 12
+        ? DateTime(year + 1, 1, 1)
+        : DateTime(year, month + 1, 1);
     final query = select(expenses)
-      ..where((tbl) => tbl.addedAt.isBetweenValues(start, end));
+      ..where(
+        (tbl) =>
+            tbl.addedAt.isBiggerOrEqualValue(start) &
+            tbl.addedAt.isSmallerThanValue(nextMonth),
+      )
+      ..orderBy([
+        (tbl) => OrderingTerm(expression: tbl.addedAt, mode: OrderingMode.desc),
+      ]);
     if (category != null && category.isNotEmpty) {
       query.where((tbl) => tbl.category.equals(category));
     }

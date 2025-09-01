@@ -1,9 +1,9 @@
+import 'package:expense_tracker_app/domain/dao/expense_dao.dart';
 import 'package:flutter/material.dart';
 
 import '../domain/database/database.dart';
 import '../domain/dto/expense_dto.dart';
 import '../domain/enums/category.dart';
-import '../infra/dao/expense_dao.dart';
 import '../l10n/app_localizations.dart';
 import '../widgets/header_widget.dart';
 
@@ -26,6 +26,11 @@ class _ExpensesSummaryState extends State<ExpensesSummary> {
     final now = DateTime.now();
     selectedMonth = now.month;
     selectedYear = now.year;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     _fetchExpenses();
   }
 
@@ -120,6 +125,23 @@ class _ExpensesSummaryState extends State<ExpensesSummary> {
                     setState(() => selectedCategory = v);
                     await _fetchExpenses();
                   },
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '${AppLocalizations.of(context).totalExpenses}: ${expenses.length}',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(width: 24),
+                Text(
+                  '${AppLocalizations.of(context).totalAmount}: R\$ ${expenses.fold<double>(0, (sum, e) => sum + e.amount).toStringAsFixed(2)}',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
